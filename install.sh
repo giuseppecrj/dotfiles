@@ -117,7 +117,17 @@ source ~/.bash_profile
 
 echo "Setting up nodeJS environments..."
 fnm use default
+source ~/.bash_profile
 # node.sh [END]
+
+# go.sh [START]
+cd ~
+
+echo "Install Go mods..."
+go get golang.org/x/tools/gopls@latest
+
+source ~/.bash_profile
+# go.sh [END]
 
 # appstore.sh [START]
 read -p "Hit [Enter] after you sign in to the App Store..."
