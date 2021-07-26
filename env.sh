@@ -24,3 +24,6 @@ if test "$(which rbenv)"; then
     eval "$(rbenv init -)"
 fi
 
+if test "$(which fnm)"; then
+    eval "$(fnm env)"
+fi
