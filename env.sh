@@ -20,3 +20,7 @@ if test "$(which brew)"; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+if test "$(which rbenv)"; then
+    eval "$(rbenv init -)"
+fi
+
