@@ -61,7 +61,7 @@ cd ~
 git clone git@github.com:giuseppecrj/dotfiles.git
 ln -s ~/dotfiles/env.sh ~/env.sh
 ln -s ~/dotfiles/.zshrc ~/.zshrc
-source ~/.env.sh
+source ~/env.sh
 
 # dots.sh [END]
 
