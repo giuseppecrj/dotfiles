@@ -14,6 +14,3 @@ export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
 
 # Autojump
 if [ -f '/usr/local/etc/profile.d/autojump.sh' ]; then source '/usr/local/etc/profile.d/autojump.sh'; fi
-
-# Rbenv
-eval "$(rbenv init -)"
