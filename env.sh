@@ -16,6 +16,7 @@ export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
 if [ -f '/usr/local/etc/profile.d/autojump.sh' ]; then source '/usr/local/etc/profile.d/autojump.sh'; fi
 
 # Homebrew
-if test $(which brew); then
+if test "$(which brew)"; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
+
