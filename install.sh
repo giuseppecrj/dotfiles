@@ -54,14 +54,14 @@ git config --global init.defaultBranch main
 # dots.sh [START]
 
 echo "Defaulting to bash..."
-chsh -s /bin/bash
+chsh -s /bin/zsh
 
 echo "Setup dotfiles..."
 cd ~
 git clone git@github.com:giuseppecrj/dotfiles.git
-ln -s ~/dotfiles/.bash_profile ~/.bash_profile
-ln -s ~/dotfiles/.bashrc ~/.bashrc
-source ~/.bash_profile
+ln -s ~/dotfiles/env.sh ~/env.sh
+ln -s ~/dotfiles/.zshrc ~/.zshrc
+source ~/.env.sh
 
 # dots.sh [END]
 
@@ -85,6 +85,7 @@ brew install grep
 brew install Schniz/tap/fnm
 brew install go
 brew install autojump
+brew install rbenv
 
 echo "Install Apps..."
 brew install --cask alfred
@@ -101,6 +102,7 @@ brew install --cask slack
 brew install --cask spotify
 brew install --cask workflowy
 brew install --cask visual-studio-code
+brew install --cask 1password
 
 echo "Cleanup Homebrew..."
 brew cleanup

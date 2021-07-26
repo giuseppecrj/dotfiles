@@ -1,3 +1,9 @@
+#code
+alias gitignore='code ~/.gitignore'
+alias zshconfig="code ~/dotfiles/.zshrc"
+alias envconfig="code ~/dotfiles/env.sh"
+alias aliases="code ~/dotfiles/terminals/aliases.sh"
+
 # cd
 alias home="cd ~"
 alias desk="cd ~/Desktop"
