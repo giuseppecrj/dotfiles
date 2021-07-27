@@ -108,6 +108,9 @@ echo "Cleanup Homebrew..."
 brew cleanup
 # homebew.sh [END]
 
+# Rosetta
+softwareupdate --install-rosetta
+
 # node.sh [START]
 echo "Installing nodeJS..."
 fnm install 16
@@ -115,11 +118,11 @@ fnm install 14
 fnm alias 14 default
 fnm alias 16 latest
 
-source ~/.bash_profile
+source ~/.zshrc
 
 echo "Setting up nodeJS environments..."
 fnm use default
-source ~/.bash_profile
+source ~/.zshrc
 # node.sh [END]
 
 # go.sh [START]
@@ -128,7 +131,7 @@ cd ~
 echo "Install Go mods..."
 go get golang.org/x/tools/gopls@latest
 
-source ~/.bash_profile
+source ~/.zshrc
 # go.sh [END]
 
 # appstore.sh [START]
