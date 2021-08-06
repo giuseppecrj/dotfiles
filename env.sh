@@ -6,6 +6,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="spaceship"
 SPACESHIP_SHOW_BATTERY="false"
+SPACESHIP_GCLOUD_SHOW="false"
 FNM_USING_LOCAL_VERSION=0
 
 plugins=(git)
