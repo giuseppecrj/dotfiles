@@ -1,22 +1,18 @@
-# OH-MY-ZSH
-export ZSH="~/.oh-my-zsh"
-
 # PATH
 export PATH="/usr/local/bin:$PATH"
 
-# Owner
+# # Owner
 export CLICOLOR=1
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export LDFLAGS="-L/usr/local/opt/libffi/lib"
 export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
+export ZSH=$HOME/.oh-my-zsh
 
-# options
 ZSH_THEME="spaceship"
 SPACESHIP_SHOW_BATTERY="false"
-plugins(git)
+plugins=(git)
 
-# source files
-source $ZSH/oh-my-zsh.sh
+source $HOME/.oh-my-zsh/oh-my-zsh.sh
 
 for file in ~/dotfiles/terminal/*
 do
