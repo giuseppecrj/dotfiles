@@ -19,9 +19,6 @@ do
     source $file
 done
 
-# Autojump
-if [ -f '/usr/local/etc/profile.d/autojump.sh' ]; then source '/usr/local/etc/profile.d/autojump.sh'; fi
-
 # Homebrew
 if test "$(which brew)"; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -36,3 +33,12 @@ fi
 if test "$(which fnm)"; then
     eval "$(fnm env)"
 fi
+
+# Autojump
+if [ -f '/opt/homebrew/etc/profile.d/autojump.sh' ]; then source '/opt/homebrew/etc/profile.d/autojump.sh'; fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/g/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/g/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/g/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/g/google-cloud-sdk/completion.zsh.inc'; fi
