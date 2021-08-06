@@ -71,6 +71,10 @@ if test !$(which brew); then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
+echo "Installing Oh-my-zsh..."
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
 echo "Updating Homebrew Repository..."
 brew update
 
