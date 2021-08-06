@@ -1,11 +1,7 @@
-# PATH
-export PATH="/usr/local/bin:$PATH"
-
-# # Owner
+# Owner
+export EDITOR="code -w"
 export CLICOLOR=1
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-export LDFLAGS="-L/usr/local/opt/libffi/lib"
-export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
 export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="spaceship"
@@ -14,7 +10,7 @@ plugins=(git)
 
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
 
-for file in ~/dotfiles/terminal/*
+for file in $HOME/dotfiles/terminal/*
 do
     source $file
 done
@@ -38,7 +34,10 @@ fi
 if [ -f '/opt/homebrew/etc/profile.d/autojump.sh' ]; then source '/opt/homebrew/etc/profile.d/autojump.sh'; fi
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/g/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/g/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then source $HOME/google-cloud-sdk/path.zsh.inc; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/g/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/g/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then source $HOME/google-cloud-sdk/completion.zsh.inc; fi
+
+# Auth change fnm version
+if [ -f $HOME/dotfiles/hooks ]; then source $HOME/dotfiles/hooks/fnm.sh; fi
