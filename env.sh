@@ -6,6 +6,8 @@ export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="spaceship"
 SPACESHIP_SHOW_BATTERY="false"
+FNM_USING_LOCAL_VERSION=0
+
 plugins=(git)
 
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
@@ -39,5 +41,5 @@ if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then source $HOME/google-cloud-sd
 # The next line enables shell command completion for gcloud.
 if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then source $HOME/google-cloud-sdk/completion.zsh.inc; fi
 
-# Auth change fnm version
-if [ -f $HOME/dotfiles/hooks ]; then source $HOME/dotfiles/hooks/fnm.sh; fi
+# Hooks for zsh
+if [ -f $HOME/dotfiles/hooks.sh ]; then source $HOME/dotfiles/hooks.sh; fi

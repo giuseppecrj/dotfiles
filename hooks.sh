@@ -1,4 +1,4 @@
-FNM_USING_LOCAL_VERSION=0
+# Auth change fnm version
 autoload -U add-zsh-hook
 
 _fnm_autoload_hook () {

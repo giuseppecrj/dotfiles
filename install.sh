@@ -126,6 +126,7 @@ source ~/.zshrc
 
 echo "Setting up nodeJS environments..."
 fnm use default
+# ln -s /opt/homebrew/bin/code /opt/homebrew/bin/s
 source ~/.zshrc
 # node.sh [END]
 
