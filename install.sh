@@ -49,6 +49,7 @@ echo "Setting up git config..."
 git config --global user.name $full_name
 git config --global user.email $email
 git config --global init.defaultBranch main
+git config --global core.editor "code --wait"
 # git.sh [END]
 
 # dots.sh [START]
@@ -61,7 +62,7 @@ cd ~
 git clone git@github.com:giuseppecrj/dotfiles.git
 ln -s ~/dotfiles/env.sh ~/env.sh
 ln -s ~/dotfiles/.zshrc ~/.zshrc
-source ~/env.sh
+source ~/.zshrc
 
 # dots.sh [END]
 

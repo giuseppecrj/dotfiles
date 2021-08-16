@@ -2,7 +2,8 @@
 alias gitignore='code ~/.gitignore'
 alias zshconfig="code ~/dotfiles/.zshrc"
 alias envconfig="code ~/dotfiles/env.sh"
-alias aliases="code ~/dotfiles/terminals/aliases.sh"
+alias aliases="code ~/dotfiles/terminal/aliases.sh"
+alias h="sudo pm2 start ~/ActiveTheory/Hydra/Server/server.js"
 
 # cd
 alias home="cd ~"

@@ -3,6 +3,7 @@ export EDITOR="code -w"
 export CLICOLOR=1
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export ZSH=$HOME/.oh-my-zsh
+export PYENV_ROOT=$HOME/.pyenv
 
 ZSH_THEME="spaceship"
 SPACESHIP_SHOW_BATTERY="false"
@@ -31,6 +32,11 @@ fi
 # fnm
 if test "$(which fnm)"; then
     eval "$(fnm env)"
+fi
+
+# pyenv
+if test "$(which pyenv)"; then
+    eval "$(pyenv init -)"
 fi
 
 # Autojump
