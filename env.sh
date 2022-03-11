@@ -4,6 +4,7 @@ export CLICOLOR=1
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export ZSH=$HOME/.oh-my-zsh
 export PYENV_ROOT=$HOME/.pyenv
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
 
 ZSH_THEME="spaceship"
 SPACESHIP_SHOW_BATTERY="false"
@@ -39,6 +40,13 @@ if test "$(which pyenv)"; then
     eval "$(pyenv init -)"
 fi
 
+# k8s
+if test "$(which kubectl)"; then
+    alias k="kubectl"
+    source <(kubectl completion zsh)
+    complete -F __start_kubectl k
+fi
+
 # Autojump
 if [ -f '/opt/homebrew/etc/profile.d/autojump.sh' ]; then source '/opt/homebrew/etc/profile.d/autojump.sh'; fi
 
@@ -50,3 +58,8 @@ if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then source $HOME/google-cl
 
 # Hooks for zsh
 if [ -f $HOME/dotfiles/hooks.sh ]; then source $HOME/dotfiles/hooks.sh; fi
+
+# Hooks for rust
+if [ -f $HOME/.cargo/env ]; then source $HOME/.cargo/env; fi
+
+path+=$HOME/solana/bin

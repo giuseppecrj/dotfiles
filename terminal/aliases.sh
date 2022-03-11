@@ -3,7 +3,10 @@ alias gitignore='code ~/.gitignore'
 alias zshconfig="code ~/dotfiles/.zshrc"
 alias envconfig="code ~/dotfiles/env.sh"
 alias aliases="code ~/dotfiles/terminal/aliases.sh"
-alias h="sudo pm2 start ~/ActiveTheory/Hydra/Server/server.js"
+alias h="hydra server --start"
+alias dps="docker ps"
+alias krrd="kubectl rollout restart deployment"
+alias checkLocal="sudo lsof -i tcp:80"
 
 # cd
 alias home="cd ~"
