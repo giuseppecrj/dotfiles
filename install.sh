@@ -94,20 +94,10 @@ brew install rbenv
 
 echo "Install Apps..."
 brew install --cask alfred
-brew install --cask android-studio
-brew install --cask balenaetcher
-brew install --cask brave-browser
-brew install --cask google-chrome
-brew install --cask firefox
 brew install --cask docker
-brew install --cask iterm2
 brew install --cask ledger-live
-brew install --cask postman
 brew install --cask slack
 brew install --cask spotify
-brew install --cask workflowy
-brew install --cask visual-studio-code
-brew install --cask 1password
 
 echo "Cleanup Homebrew..."
 brew cleanup
