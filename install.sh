@@ -99,6 +99,7 @@ brew install --cask docker
 brew install --cask ledger-live
 brew install --cask slack
 brew install --cask spotify
+brew install --cask brave-browser
 
 echo "Cleanup Homebrew..."
 brew cleanup
