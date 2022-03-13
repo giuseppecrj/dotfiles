@@ -91,6 +91,7 @@ brew install fnm
 brew install go
 brew install autojump
 brew install rbenv
+brew install pyenv
 
 echo "Install Apps..."
 brew install --cask alfred
