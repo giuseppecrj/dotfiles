@@ -37,7 +37,7 @@ open https://github.com/settings/keys
 # ssh.sh [END]
 
 # xcode.sh [START]
-ead -p "Hit [Enter] to continue once public key is added..."
+read -p "Hit [Enter] to continue once public key is added..."
 echo "Install Xcode Dev Tools..."
 xcode-select --install
 read -p "Hit [Enter] to contine once Xcode Tools completes..."
