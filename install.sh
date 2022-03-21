@@ -75,6 +75,9 @@ fi
 
 echo "Installing Oh-my-zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+source ~/.zshrc
+
+git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
 
 echo "Updating Homebrew Repository..."
 brew update
@@ -92,6 +95,7 @@ brew install go
 brew install autojump
 brew install rbenv
 brew install pyenv
+brew install spaceship
 
 echo "Install Apps..."
 brew install --cask alfred
@@ -116,7 +120,6 @@ fnm install 16
 fnm install 14
 fnm alias 14 default
 fnm alias 16 latest
-
 source ~/.zshrc
 
 echo "Setting up nodeJS environments..."
