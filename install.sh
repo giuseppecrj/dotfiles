@@ -102,6 +102,7 @@ brew install --cask ledger-live
 brew install --cask slack
 brew install --cask spotify
 brew install --cask brave-browser
+brew install --cask github
 
 echo "Cleanup Homebrew..."
 brew cleanup
