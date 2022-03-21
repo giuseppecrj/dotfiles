@@ -103,6 +103,7 @@ brew install --cask slack
 brew install --cask spotify
 brew install --cask brave-browser
 brew install --cask github
+brew install --cask 1password
 
 echo "Cleanup Homebrew..."
 brew cleanup
