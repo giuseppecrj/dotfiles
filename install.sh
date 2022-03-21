@@ -56,7 +56,7 @@ git config --global alias.st "status"
 
 # dots.sh [START]
 
-echo "Defaulting to bash..."
+echo "Defaulting to zsh..."
 chsh -s /bin/zsh
 
 echo "Setup dotfiles..."
@@ -64,7 +64,6 @@ cd ~
 git clone git@github.com:giuseppecrj/dotfiles.git
 ln -s ~/dotfiles/env.sh ~/env.sh
 ln -s ~/dotfiles/.zshrc ~/.zshrc
-source ~/.zshrc
 
 # dots.sh [END]
 
