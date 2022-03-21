@@ -77,9 +77,6 @@ fi
 echo "Installing Oh-my-zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-cp ~/dotfiles/.zshrc ~/.zshrc
-source ~/.zshrc
-
 echo "Updating Homebrew Repository..."
 brew update
 
