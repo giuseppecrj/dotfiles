@@ -75,6 +75,12 @@ fi
 
 echo "Installing Oh-my-zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+source ~/.zshrc
+
+# installing spaceship theme [START]
+git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+# installing spaceship theme [END]
 
 echo "Updating Homebrew Repository..."
 brew update
@@ -92,6 +98,7 @@ brew install go
 brew install autojump
 brew install rbenv
 brew install pyenv
+brew install spaceship
 
 echo "Install Apps..."
 brew install --cask alfred
@@ -102,6 +109,8 @@ brew install --cask spotify
 brew install --cask brave-browser
 brew install --cask github
 brew install --cask 1password
+brew install --cask google-drive
+brew install --cask fig
 
 echo "Cleanup Homebrew..."
 brew cleanup
@@ -116,7 +125,6 @@ fnm install 16
 fnm install 14
 fnm alias 14 default
 fnm alias 16 latest
-
 source ~/.zshrc
 
 echo "Setting up nodeJS environments..."
@@ -136,7 +144,7 @@ source ~/.zshrc
 
 # appstore.sh [START]
 read -p "Hit [Enter] after you sign in to the App Store..."
-echo "Install App Store apps..."
+echo "Installings Xcode..."
 mas install 497799835 # Xcode
 # appstore.sh [END]
 
