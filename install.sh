@@ -77,7 +77,10 @@ echo "Installing Oh-my-zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 source ~/.zshrc
 
-git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+# installing spaceship theme [START]
+git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+# installing spaceship theme [END]
 
 echo "Updating Homebrew Repository..."
 brew update
@@ -106,6 +109,7 @@ brew install --cask spotify
 brew install --cask brave-browser
 brew install --cask github
 brew install --cask 1password
+brew install --cask google-drive
 
 echo "Cleanup Homebrew..."
 brew cleanup
@@ -139,7 +143,7 @@ source ~/.zshrc
 
 # appstore.sh [START]
 read -p "Hit [Enter] after you sign in to the App Store..."
-echo "Install App Store apps..."
+echo "Installings Xcode..."
 mas install 497799835 # Xcode
 # appstore.sh [END]
 
