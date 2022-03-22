@@ -110,6 +110,7 @@ brew install --cask brave-browser
 brew install --cask github
 brew install --cask 1password
 brew install --cask google-drive
+brew install --cask fig
 
 echo "Cleanup Homebrew..."
 brew cleanup
