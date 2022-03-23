@@ -46,6 +46,8 @@ sudo xcodebuild -license
 
 # git.sh [START]
 echo "Setting up git config..."
+echo ".DS_Store\n.vscode\nnode_modules" >> ~/.gitignore
+git config --global core.excludesfile ~/.gitignore
 git config --global user.name $full_name
 git config --global user.email $email
 git config --global init.defaultBranch main
