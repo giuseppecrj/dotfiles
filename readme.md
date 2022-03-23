@@ -4,3 +4,4 @@
 - Step 5: `git clone https://github.com/giuseppecrj/dotfiles.git`
 - `cd ~/dotfiles`
 - `./install.sh`
+- Finished!
