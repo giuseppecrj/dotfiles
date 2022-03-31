@@ -113,6 +113,8 @@ brew install --cask github
 brew install --cask 1password
 brew install --cask google-drive
 brew install --cask fig
+brew install --cask remix-ide
+brew install --cask ganache
 
 echo "Cleanup Homebrew..."
 brew cleanup
