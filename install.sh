@@ -115,6 +115,8 @@ brew install --cask google-drive
 brew install --cask fig
 brew install --cask remix-ide
 brew install --cask ganache
+brew install --cask discord
+brew install --cask notion
 
 echo "Cleanup Homebrew..."
 brew cleanup
