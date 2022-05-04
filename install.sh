@@ -117,6 +117,8 @@ brew install --cask remix-ide
 brew install --cask ganache
 brew install --cask discord
 brew install --cask notion
+brew install --cask remarkable
+brew install --cask telegram
 
 echo "Cleanup Homebrew..."
 brew cleanup

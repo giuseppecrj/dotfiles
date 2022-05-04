@@ -54,4 +54,3 @@ if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then source $HOME/google-cl
 
 # Hooks for zsh
 if [ -f $HOME/dotfiles/hooks.sh ]; then source $HOME/dotfiles/hooks.sh; fi
-
