@@ -5,6 +5,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export ZSH=$HOME/.oh-my-zsh
 export PYENV_ROOT=$HOME/.pyenv
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
+export GPG_TTY=$(tty)
 
 ZSH_THEME="spaceship"
 SPACESHIP_SHOW_BATTERY="false"
@@ -54,3 +55,8 @@ if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then source $HOME/google-cl
 
 # Hooks for zsh
 if [ -f $HOME/dotfiles/hooks.sh ]; then source $HOME/dotfiles/hooks.sh; fi
+
+export PATH="$PATH:/Users/g/.foundry/bin"
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
