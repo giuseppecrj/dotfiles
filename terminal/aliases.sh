@@ -27,7 +27,7 @@ alias gp="git push origin"
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
 # Open bitbucket of current project
-alias github='open "https://github.com/$(git ls-remote --get-url origin | cut -f 2 -d @ | cut -f 2 -d ":" | cut -f 1 -d ".")"'
+alias github='open $(git config remote.origin.url)'
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
