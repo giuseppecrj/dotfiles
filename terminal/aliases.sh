@@ -20,13 +20,14 @@ alias sshconfig="s ~/.ssh"
 
 # git
 alias gcmax="git commit -a --allow-empty-message -m ''"
+alias gc="git commit -m"
 alias gp="git push origin"
 
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
 # Open bitbucket of current project
-alias btb='open "https://bitbucket.com/$(git ls-remote --get-url origin | cut -f 2 -d @ | cut -f 2 -d ":" | cut -f 1 -d ".")"'
+alias github='open "https://github.com/$(git ls-remote --get-url origin | cut -f 2 -d @ | cut -f 2 -d ":" | cut -f 1 -d ".")"'
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
