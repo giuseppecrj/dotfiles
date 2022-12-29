@@ -2,8 +2,8 @@
 alias gitignore='code ~/.gitignore'
 alias zshconfig="code ~/dotfiles/.zshrc"
 alias envconfig="code ~/dotfiles/env.sh"
+alias sshconfig="code ~/.ssh"
 alias aliases="code ~/dotfiles/terminal/aliases.sh"
-alias h="hydra server --start"
 alias dps="docker ps"
 alias krrd="kubectl rollout restart deployment"
 alias checkLocal="sudo lsof -i tcp:80"
@@ -16,7 +16,6 @@ alias ...="cd ../../"
 
 # ssh
 alias getssh="cat ~/.ssh/id_rsa.pub | pbcopy"
-alias sshconfig="s ~/.ssh"
 
 # git
 alias gcmax="git commit -a --allow-empty-message -m ''"
@@ -26,7 +25,7 @@ alias gp="git push origin"
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
-# Open bitbucket of current project
+# Open github of current project
 alias github='open $(git config remote.origin.url)'
 
 # IP addresses
