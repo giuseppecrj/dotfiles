@@ -7,7 +7,7 @@ alias aliases="code ~/dotfiles/terminal/aliases.sh"
 alias dps="docker ps"
 alias krrd="kubectl rollout restart deployment"
 alias checkLocal="sudo lsof -i tcp:80"
-
+alias fit="forge init --template giuseppecrj/smart-contract-template.git"
 # cd
 alias home="cd ~"
 alias desk="cd ~/Desktop"
