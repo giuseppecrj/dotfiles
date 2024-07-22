@@ -123,6 +123,7 @@ brew install --cask discord
 brew install --cask notion
 brew install --cask remarkable
 brew install --cask telegram
+brew install --cask tunnelbear
 
 echo "Cleanup Homebrew..."
 brew cleanup

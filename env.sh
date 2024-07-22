@@ -41,11 +41,14 @@ if test "$(which pyenv)"; then
     eval "$(pyenv init -)"
 fi
 
+# zoxide
+if test "$(which zoxide)"; then
+    source <(fzf --zsh)
+    eval "$(zoxide init zsh --cmd j)"
+fi
+
 # Rust
 if [ -f $HOME/.cargo/env ]; then source $HOME/.cargo/env; fi
-
-# Autojump
-if [ -f '/opt/homebrew/etc/profile.d/autojump.sh' ]; then source '/opt/homebrew/etc/profile.d/autojump.sh'; fi
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then source $HOME/google-cloud-sdk/path.zsh.inc; fi

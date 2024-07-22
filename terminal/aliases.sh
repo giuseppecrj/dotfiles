@@ -7,7 +7,12 @@ alias aliases="code ~/dotfiles/terminal/aliases.sh"
 alias dps="docker ps"
 alias krrd="kubectl rollout restart deployment"
 alias checkLocal="sudo lsof -i tcp:80"
-alias fit="forge init --template giuseppecrj/smart-contract-template.git"
+alias fit="forge init --template giuseppecrj/forge-template-base && yarn"
+alias finit="forge init --template giuseppecrj/forge-template-base && yarn"
+alias nuke="git fetch -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'); do git branch -D $branch; done"
+alias buou="brew update && brew outdated && brew upgrade"
+alias foundryconfig="code ~/.foundry"
+
 # cd
 alias home="cd ~"
 alias desk="cd ~/Desktop"
@@ -57,6 +62,9 @@ alias c="tr -d '\n' | pbcopy"
 
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+
+# Compress an image (JPG, PNG, GIF, etc.) without losing quality
+alias compressImage="sips -s format jpeg -s formatOptions low"
 
 # Empty the Trash on all mounted volumes and the main HDD
 # Also, clear Apple’s System Logs to improve shell startup speed
