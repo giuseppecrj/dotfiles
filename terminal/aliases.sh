@@ -1,9 +1,10 @@
-#code
-alias gitignore='code ~/.gitignore'
-alias zshconfig="code ~/dotfiles/.zshrc"
-alias envconfig="code ~/dotfiles/env.sh"
-alias sshconfig="code ~/.ssh"
-alias aliases="code ~/dotfiles/terminal/aliases.sh"
+#cursor
+alias gitignore='cursor ~/.gitignore'
+alias zshconfig="cursor ~/dotfiles/.zshrc"
+alias envconfig="cursor ~/dotfiles/env.sh"
+alias sshconfig="cursor ~/.ssh"
+alias aliases="cursor ~/dotfiles/terminal/aliases.sh"
+alias s='/usr/local/bin/cursor'
 alias dps="docker ps"
 alias krrd="kubectl rollout restart deployment"
 alias checkLocal="sudo lsof -i tcp:80"
@@ -11,7 +12,7 @@ alias fit="forge init --template giuseppecrj/forge-template-base && yarn"
 alias finit="forge init --template giuseppecrj/forge-template-base && yarn"
 alias nuke="git fetch -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'); do git branch -D $branch; done"
 alias buou="brew update && brew outdated && brew upgrade"
-alias foundryconfig="code ~/.foundry"
+alias foundryconfig="cursor ~/.foundry"
 
 # cd
 alias home="cd ~"
