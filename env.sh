@@ -47,17 +47,13 @@ if test "$(which zoxide)"; then
     eval "$(zoxide init zsh --cmd j)"
 fi
 
-# Rust
-if [ -f $HOME/.cargo/env ]; then source $HOME/.cargo/env; fi
+# Source files if they exist
+source_if_exists() {
+    [ -f "$1" ] && source "$1"
+}
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then source $HOME/google-cloud-sdk/path.zsh.inc; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then source $HOME/google-cloud-sdk/completion.zsh.inc; fi
-
-# Hooks for zsh
-if [ -f $HOME/dotfiles/hooks.sh ]; then source $HOME/dotfiles/hooks.sh; fi
+source_if_exists "$HOME/.cargo/env"
+source_if_exists "$HOME/dotfiles/hooks.sh"
 
 export PATH="$PATH:$HOME/.foundry/bin"
 export PATH="$PATH:$HOME/Library/Python/3.10/bin"
