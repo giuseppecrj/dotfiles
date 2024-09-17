@@ -16,48 +16,43 @@ plugins=(git)
 
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
 
-for file in $HOME/dotfiles/terminal/*
-do
-    source $file
-done
+if [ -d "$HOME/dotfiles/terminal" ]; then
+    for file in "$HOME"/dotfiles/terminal/*; do
+        [ -f "$file" ] && source "$file"
+    done
+fi
 
 # Homebrew
-if test "$(which brew)"; then
+if command -v brew >/dev/null 2>&1; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Rbenv
-if test "$(which rbenv)"; then
+if command -v rbenv >/dev/null 2>&1; then
     eval "$(rbenv init -)"
 fi
 
 # fnm
-if test "$(which fnm)"; then
-    eval "$(fnm env)"
-fi
+command -v fnm >/dev/null 2>&1 && eval "$(fnm env)"
 
 # pyenv
-if test "$(which pyenv)"; then
-    eval "$(pyenv init -)"
-fi
+command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
 
 # zoxide
-if test "$(which zoxide)"; then
+if command -v zoxide >/dev/null 2>&1; then
     source <(fzf --zsh)
     eval "$(zoxide init zsh --cmd j)"
 fi
 
-# Rust
-if [ -f $HOME/.cargo/env ]; then source $HOME/.cargo/env; fi
+# Source files if they exist
+source_if_exists() {
+    [ -f "$1" ] && source "$1"
+}
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then source $HOME/google-cloud-sdk/path.zsh.inc; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then source $HOME/google-cloud-sdk/completion.zsh.inc; fi
-
-# Hooks for zsh
-if [ -f $HOME/dotfiles/hooks.sh ]; then source $HOME/dotfiles/hooks.sh; fi
+source_if_exists "$HOME/.cargo/env"
+source_if_exists "$HOME/google-cloud-sdk/path.zsh.inc"
+source_if_exists "$HOME/google-cloud-sdk/completion.zsh.inc"
+source_if_exists "$HOME/dotfiles/hooks.sh"
 
 export PATH="$PATH:$HOME/.foundry/bin"
 export PATH="$PATH:$HOME/Library/Python/3.10/bin"
