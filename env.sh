@@ -1,5 +1,5 @@
 # Owner
-export EDITOR="cursor -w"
+export EDITOR="code -w"
 export CLICOLOR=1
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export ZSH=$HOME/.oh-my-zsh
