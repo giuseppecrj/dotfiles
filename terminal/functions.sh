@@ -68,19 +68,10 @@ function dataurlc() {
   dataurl $1 | pbcopy
 }
 
-# Create a git.io short URL
-function gitio() {
-  if [ -z "${1}" -o -z "${2}" ]; then
-    echo "Usage: \`gitio slug url\`"
-    return 1
-  fi
-  curl -i http://git.io/ -F "url=${2}" -F "code=${1}"
-}
-
 # Start an HTTP server from a directory, optionally specifying the port
 function server() {
   sleep 1 && open "http://localhost:8080/" &
-  python -m SimpleHTTPServer 8080
+  python3 -m http.server 8080
 }
 
 # Compare original and gzipped file size
@@ -96,9 +87,9 @@ function gz() {
 # Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
 function json() {
   if [ -t 0 ]; then # argument
-    python -mjson.tool <<< "$*" | pygmentize -l javascript
+    python3 -mjson.tool <<< "$*" | pygmentize -l javascript
   else # pipe
-    python -mjson.tool | pygmentize -l javascript
+    python3 -mjson.tool | pygmentize -l javascript
   fi
 }
 
@@ -110,7 +101,3 @@ function tre() {
   tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
 
-function tunnel() {
-  echo "Starting an ssh tunnel. Public address: https://mgv.io:$1"
-  # ssh -i ~/.ssh/at-tunnel -N -R *:$1:localhost:$1 g@35.230.81.169
-}

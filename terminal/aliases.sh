@@ -4,13 +4,15 @@ alias zshconfig="cursor ~/dotfiles/.zshrc"
 alias envconfig="cursor ~/dotfiles/env.sh"
 alias sshconfig="cursor ~/.ssh"
 alias aliases="cursor ~/dotfiles/terminal/aliases.sh"
-alias s='/usr/local/bin/code'
+alias s='cursor .'
 alias dps="docker ps"
 alias krrd="kubectl rollout restart deployment"
 alias checkLocal="sudo lsof -i tcp:80"
 alias fit="forge init --template giuseppecrj/forge-template-base && yarn"
 alias finit="forge init --template giuseppecrj/forge-template-base && yarn"
-alias nuke="git fetch -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'); do git branch -D $branch; done"
+nuke() {
+  git fetch -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'); do git branch -D "$branch"; done
+}
 alias buou="brew update && brew outdated && brew upgrade"
 alias foundryconfig="cursor ~/.foundry"
 
@@ -80,7 +82,7 @@ alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && 
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
 # URL-encode strings
-alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+alias urlencode='python3 -c "import sys, urllib.parse; print(urllib.parse.quote_plus(sys.argv[1]))"'
 
 # Merge PDF files
 # Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
@@ -108,7 +110,6 @@ done
 # Stuff I never really use but cannot delete either because of http://xkcd.com/530/
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 7'"
-alias hax="growlnotify -a 'Activity Monitor' 'System error' -m 'WTF R U DOIN'"
 
 # Kill all the tabs in Chrome to free up memory
 # [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
