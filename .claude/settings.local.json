@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(zsh:*)",
+      "Bash(bash:*)",
+      "Bash(echo '{\"foo\":42}' | python3 -mjson.tool --json-lines 2>&1)"
     ]
   }
 }
