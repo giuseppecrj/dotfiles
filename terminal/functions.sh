@@ -87,9 +87,9 @@ function gz() {
 # Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
 function json() {
   if [ -t 0 ]; then # argument
-    python3 -mjson.tool <<< "$*" | pygmentize -l javascript
+    python3 -mjson.tool --json-lines <<< "$*"
   else # pipe
-    python3 -mjson.tool | pygmentize -l javascript
+    python3 -mjson.tool --json-lines
   fi
 }
 

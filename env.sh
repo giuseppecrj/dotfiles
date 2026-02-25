@@ -37,4 +37,4 @@ command -v brew >/dev/null && [[ -f "$(brew --prefix)/opt/spaceship/spaceship.zs
 [[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 
 # PATH
-export PATH="$HOME/.local/bin:$HOME/.bun/bin:$HOME/.foundry/bin:$HOME/Library/Python/3.10/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.bun/bin:$HOME/.foundry/bin:$PATH"

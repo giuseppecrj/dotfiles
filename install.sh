@@ -55,18 +55,11 @@ if [ ! -d "$ZSH" ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-# installing spaceship theme [START]
-if [ ! -d "$ZSH_CUSTOM/themes/spaceship-prompt" ]; then
-    git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
-    ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
-fi
-# installing spaceship theme [END]
-
 echo "Updating Homebrew Repository..."
 brew update
 
 echo "Installing Tools with Homebrew..."
-brew install yarn fnm zoxide chezmoi
+brew install yarn fnm zoxide spaceship
 
 echo "Install Apps..."
 brew install --cask 1password
