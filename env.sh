@@ -32,8 +32,11 @@ command -v fnm >/dev/null && eval "$(fnm env --use-on-cd)"
 command -v pyenv >/dev/null && eval "$(pyenv init -)"
 command -v wt >/dev/null && eval "$(wt config shell init zsh)"
 
-if command -v zoxide >/dev/null; then
+if command -v fzf >/dev/null; then
     source <(fzf --zsh)
+fi
+
+if command -v zoxide >/dev/null; then
     eval "$(zoxide init zsh --cmd j)"
 fi
 
