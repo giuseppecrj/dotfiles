@@ -16,7 +16,7 @@ read -p "Enter Name: " full_name
 read -p "Enter Email: " email
 
 echo "Setting up git config..."
-echo ".DS_Store\n.vscode\nnode_modules" >> ~/.gitignore
+echo ".DS_Store\n.vscode\nnode_modules\n.secrets.env" >> ~/.gitignore
 git config --global core.editor "code --wait"
 git config --global core.excludesfile ~/.gitignore
 git config --global core.whitespace -trailing-space
@@ -65,43 +65,23 @@ echo "Install Apps..."
 brew install --cask 1password
 brew install --cask 1password-cli
 
-echo "Setting up 1Password CLI..."
-# Sign in to 1Password CLI
-echo "Please sign in to 1Password CLI..."
-op account add --address my.1password.com --email $email
+echo "Setting up 1Password CLI and SSH agent..."
+echo "Please sign in to 1Password CLI if needed..."
+op account add --address my.1password.com --email "$email" || true
 
-# Create SSH key in 1Password
-echo "Creating SSH key in 1Password..."
-op item create --category=ssh-key \
-    --title="Personal SSH Key" \
-    --vault=Private \
-    --generate-password=32 \
-    --tags=ssh,development
+# Keep private SSH keys inside 1Password. Do not export them to ~/.ssh.
+# Enable the 1Password SSH agent in the 1Password app, then use it for Git SSH signing.
+mkdir -p ~/dotfiles/bin ~/.config/git
+chmod 755 ~/dotfiles/bin/git-ssh-sign-1password 2>/dev/null || true
 
-# Get the SSH key from 1Password
-SSH_KEY=$(op item get "Personal SSH Key" --format=json | jq -r '.fields[] | select(.id=="password") | .value')
+git config --global gpg.format ssh
+git config --global commit.gpgsign true
+git config --global gpg.ssh.program "$HOME/dotfiles/bin/git-ssh-sign-1password"
+git config --global gpg.ssh.allowedSignersFile "$HOME/.config/git/allowed_signers"
+touch "$HOME/.config/git/allowed_signers"
 
-# Create SSH directory if it doesn't exist
-mkdir -p ~/.ssh
-chmod 700 ~/.ssh
-
-# Save the SSH key
-echo "$SSH_KEY" > ~/.ssh/id_rsa
-chmod 600 ~/.ssh/id_rsa
-
-# Generate public key
-ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
-
-# Create SSH config with 1Password integration
-cat > ~/.ssh/config << EOF
-Host *
-    IdentityFile ~/.ssh/id_rsa
-    AddKeysToAgent yes
-    UseKeychain yes
-    ServerAliveInterval 5
-    ServerAliveCountMax 1
-EOF
-chmod 600 ~/.ssh/config
+echo "Git SSH signing is configured to use the 1Password SSH agent."
+echo "Add your public signing key to ~/.config/git/allowed_signers if it is not present."
 
 echo "Cleanup Homebrew..."
 brew cleanup
@@ -147,15 +127,8 @@ mas install 497799835 # Xcode
 # default-osx [START]
 echo "Setup defaults..."
 
-# Ask for confirmation before disabling Gatekeeper
-read -p "Do you want to disable Gatekeeper? (y/n) " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    sudo spctl --master-disable
-    echo "Gatekeeper disabled"
-else
-    echo "Gatekeeper remains enabled"
-fi
+# Gatekeeper is intentionally left enabled. If you need to run an unsigned app,
+# allow that app explicitly in System Settings instead of disabling Gatekeeper globally.
 
 # Set system preferences
 defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"

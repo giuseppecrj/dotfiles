@@ -24,7 +24,7 @@ function mkd() {
 }
 
 function clone() {
-  git clone $1 $2
+  git clone "$1" "$2"
 }
 
 # Change working directory to the top-most Finder window location
@@ -65,7 +65,7 @@ function dataurl() {
 
 # Create a data URL from a file and copy it to the clipboard
 function dataurlc() {
-  dataurl $1 | pbcopy
+  dataurl "$1" | pbcopy
 }
 
 # Start an HTTP server from a directory, optionally specifying the port
@@ -101,3 +101,27 @@ function tre() {
   tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
 
+function tunnel() {
+  echo "Starting an ssh tunnel. Public address: https://mgv.io:$1"
+  # ssh -i ~/.ssh/at-tunnel -N -R *:$1:localhost:$1 g@35.230.81.169
+}
+
+function selectors() {
+  if [ -z "$1" ]; then
+    echo "Usage: selectors <ContractName>"
+    echo "Example: selectors MembershipFacet"
+    return 1
+  fi
+
+  local contract_name="$1"
+  local json_path="out/${contract_name}.sol/${contract_name}.json"
+
+  if [ ! -f "$json_path" ]; then
+    echo "❌ Error: Contract artifact not found at: $json_path"
+    echo "💡 Tip: Run 'forge build' first or check the contract name"
+    return 1
+  fi
+
+  echo "📋 Function Selectors for ${contract_name}:\n"
+  jq -r '.methodIdentifiers | to_entries[] | "\(.value) | \(.key)"' "$json_path" | sort | column -t -s "|"
+}

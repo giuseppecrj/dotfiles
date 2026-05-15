@@ -14,6 +14,8 @@ nuke() {
 }
 alias buou="brew update && brew outdated && brew upgrade"
 alias foundryconfig="cursor ~/.foundry"
+alias cls='printf "\033c"'
+alias bunx='bun x'
 
 # cd
 alias home="cd ~"
@@ -67,9 +69,21 @@ alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 # Compress an image (JPG, PNG, GIF, etc.) without losing quality
 alias compressImage="sips -s format jpeg -s formatOptions low"
 
-# Empty the Trash on all mounted volumes and the main HDD
-# Also, clear Apple’s System Logs to improve shell startup speed
-alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+# Empty the Trash on all mounted volumes and the main HDD.
+# Also clear Apple’s System Logs to improve shell startup speed.
+emptytrash() {
+  echo "This will delete trash folders on mounted volumes, ~/.Trash, and old ASL logs."
+  printf "Continue? [y/N] "
+  read -r reply
+  case "$reply" in
+    [Yy]|[Yy][Ee][Ss]) ;;
+    *) echo "Cancelled"; return 1 ;;
+  esac
+
+  sudo rm -rfv /Volumes/*/.Trashes
+  sudo rm -rfv ~/.Trash
+  sudo rm -rfv /private/var/log/asl/*.asl
+}
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
@@ -112,4 +126,11 @@ alias pumpitup="osascript -e 'set volume 7'"
 # Kill all the tabs in Chrome to free up memory
 # [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
-alias poweroff="sudo shutdown -h now"
+poweroff() {
+  printf "Shutdown this Mac now? [y/N] "
+  read -r reply
+  case "$reply" in
+    [Yy]|[Yy][Ee][Ss]) sudo shutdown -h now ;;
+    *) echo "Cancelled"; return 1 ;;
+  esac
+}

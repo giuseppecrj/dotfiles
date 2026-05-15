@@ -20,10 +20,10 @@ FNM_USING_LOCAL_VERSION=0
 
 plugins=(git macos)
 
-source $HOME/.oh-my-zsh/oh-my-zsh.sh
+source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 
-for file in $HOME/dotfiles/terminal/*; do
-    source $file
+for file in "$HOME"/dotfiles/terminal/*.sh; do
+    [ -f "$file" ] && source "$file"
 done
 
 # Tool initializers
@@ -37,9 +37,14 @@ if command -v zoxide >/dev/null; then
     eval "$(zoxide init zsh --cmd j)"
 fi
 
+source_if_exists() {
+    [ -f "$1" ] && source "$1"
+}
+
 # Source optional files
-[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
-[[ -f "$HOME/dotfiles/hooks.sh" ]] && source "$HOME/dotfiles/hooks.sh"
+source_if_exists "$HOME/.secrets.env"
+source_if_exists "$HOME/.cargo/env"
+source_if_exists "$HOME/dotfiles/hooks.sh"
 [[ -f /opt/homebrew/opt/spaceship/spaceship.zsh ]] && source /opt/homebrew/opt/spaceship/spaceship.zsh
 [[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 
