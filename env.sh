@@ -18,6 +18,11 @@ FPATH="/opt/homebrew/share/zsh/site-functions:${FPATH}"
 
 FNM_USING_LOCAL_VERSION=0
 
+ZSH_THEME="spaceship"
+SPACESHIP_SHOW_BATTERY="false"
+SPACESHIP_GCLOUD_SHOW="false"
+SPACESHIP_PROMPT_ASYNC="false"
+
 plugins=(git macos)
 
 source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
