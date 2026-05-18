@@ -1,7 +1,6 @@
-- Step 1: [VS Code](https://code.visualstudio.com/download)
-- Step 3: Open VS Code Terminal
-- Step 4: cd ~
-- Step 5: `git clone https://github.com/giuseppecrj/dotfiles.git`
-- `cd ~/dotfiles`
-- `./install.sh`
+- Step 1: Open Terminal or Warp
+- Step 2: `cd ~`
+- Step 3: `git clone https://github.com/giuseppecrj/dotfiles.git`
+- Step 4: `cd ~/dotfiles`
+- Step 5: `./install.sh`
 - Finished!
