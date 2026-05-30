@@ -1,10 +1,10 @@
-# Warp
-alias gitignore='open -a Warp ~/.gitignore'
-alias zshconfig="open -a Warp ~/dotfiles/.zshrc"
-alias envconfig="open -a Warp ~/dotfiles/env.sh"
-alias sshconfig="open -a Warp ~/.ssh"
-alias aliases="open -a Warp ~/dotfiles/terminal/aliases.sh"
-alias s='open -a Warp .'
+# Cursor
+alias gitignore='code ~/.gitignore'
+alias zshconfig="code ~/dotfiles/.zshrc"
+alias envconfig="code ~/dotfiles/env.sh"
+alias sshconfig="code ~/.ssh"
+alias aliases="code ~/dotfiles/terminal/aliases.sh"
+alias s='code .'
 alias dps="docker ps"
 alias krrd="kubectl rollout restart deployment"
 alias checkLocal="sudo lsof -i tcp:80"
@@ -13,7 +13,7 @@ nuke() {
   git fetch -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'); do git branch -D "$branch"; done
 }
 alias buou="brew update && brew outdated && brew upgrade"
-alias foundryconfig="open -a Warp ~/.foundry"
+alias foundryconfig="code ~/.foundry"
 alias cls='printf "\033c"'
 alias bunx='bun x'
 
