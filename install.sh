@@ -138,7 +138,6 @@ install_cask obsidian "Obsidian"
 install_cask postgres-app "Postgres"
 install_cask tailscale "Tailscale"
 install_cask thebrowsercompany-dia "Dia"
-install_cask warp "Warp"
 # Intentionally not installed here: non-Pi agent apps, AI IDEs, chat/meeting apps, and hardware-specific drivers.
 # homebrew.sh [END]
 
@@ -158,7 +157,11 @@ fi
 
 ln -sfn "$DOTFILES_DIR/env.sh" "$HOME/env.sh"
 ln -sfn "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
-ln -sfn "$DOTFILES_DIR/hooks.sh" "$HOME/hooks.sh"
+if [ -L "$HOME/hooks.sh" ]; then
+    rm "$HOME/hooks.sh"
+elif [ -e "$HOME/hooks.sh" ]; then
+    echo "Leaving existing non-symlink in place: $HOME/hooks.sh"
+fi
 
 mkdir -p "$HOME/Library/Fonts"
 cp -f "$DOTFILES_DIR"/fonts/*.ttf "$HOME/Library/Fonts/"
@@ -221,7 +224,6 @@ git config --global alias.untrack "rm --cache --"
 git config --global alias.cleanup "!git branch --merged | grep  -v '\*\|main\|develop' | xargs -n 1 -r git branch -d"
 git config --global alias.cleanups "!git branch -vv | grep ': gone]' | grep -v '\*' | awk '{ print \$1; }' | xargs -r git branch -D"
 
-git config --global core.editor "open -a Warp -W"
 git config --global core.excludesfile "$HOME/.gitignore"
 git config --global core.whitespace -trailing-space
 
@@ -300,23 +302,13 @@ if [ "$(uname -m)" = "arm64" ]; then
     softwareupdate --install-rosetta --agree-to-license || true
 fi
 
-# bun.sh [START]
-echo "Installing Bun..."
-if [ ! -x "$HOME/.bun/bin/bun" ]; then
-    curl -fsSL https://bun.sh/install | bash
-fi
-# bun.sh [END]
-
 # node.sh [START]
 echo "Installing dev runtimes with mise..."
 # Install latest Node.js, Go, aube, and fnox; set global defaults
 mise install node@latest go@latest aube@latest fnox@latest
 mise use -g node@latest go@latest aube@latest fnox@latest
 
-if [ -f "$HOME/.zshrc" ]; then
-    # shellcheck disable=SC1090
-    source "$HOME/.zshrc"
-fi
+eval "$(mise activate bash)"
 
 echo "Installing global npm tools..."
 npm install -g \

@@ -1,4 +1,4 @@
-- Step 1: Open Terminal or Warp
+- Step 1: Open Terminal
 - Step 2: `cd ~`
 - Step 3: `git clone https://github.com/giuseppecrj/dotfiles.git`
 - Step 4: `cd ~/dotfiles`
