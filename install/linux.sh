@@ -107,6 +107,12 @@ if [ -d "$DOTFILES_DIR/fonts" ]; then
 fi
 
 echo "Configuring git..."
+mkdir -p "$HOME/.ssh"
+chmod 700 "$HOME/.ssh"
+ssh-keyscan github.com >> "$HOME/.ssh/known_hosts" 2>/dev/null || true
+sort -u "$HOME/.ssh/known_hosts" -o "$HOME/.ssh/known_hosts" 2>/dev/null || true
+chmod 600 "$HOME/.ssh/known_hosts" 2>/dev/null || true
+
 touch "$HOME/.gitignore"
 grep -qxF ".secrets.env" "$HOME/.gitignore" || echo ".secrets.env" >> "$HOME/.gitignore"
 grep -qxF ".DS_Store" "$HOME/.gitignore" || echo ".DS_Store" >> "$HOME/.gitignore"
