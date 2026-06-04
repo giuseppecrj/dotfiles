@@ -108,9 +108,19 @@ fi
 
 if command -v zsh >/dev/null 2>&1 && [ "${SHELL:-}" != "$(command -v zsh)" ]; then
     if [ -t 0 ]; then
-        chsh -s "$(command -v zsh)" || echo "Could not change login shell; run: chsh -s $(command -v zsh)"
+        chsh -s "$(command -v zsh)" || echo "Could not change login shell; using ~/.bash_profile zsh handoff instead."
     else
-        echo "Login shell is still ${SHELL:-unknown}; run interactively if desired: chsh -s $(command -v zsh)"
+        echo "Login shell is still ${SHELL:-unknown}; using ~/.bash_profile zsh handoff."
+    fi
+
+    if ! grep -q "dotfiles zsh handoff" "$HOME/.bash_profile" 2>/dev/null; then
+        cat >> "$HOME/.bash_profile" <<'EOF'
+
+# dotfiles zsh handoff
+if [ -t 1 ] && command -v zsh >/dev/null 2>&1; then
+    exec zsh -l
+fi
+EOF
     fi
 fi
 
