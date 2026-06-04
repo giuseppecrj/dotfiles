@@ -138,6 +138,35 @@ ssh exe.dev 'integrations add github --name myrepo --repository owner/myrepo --a
 
 Prefer tag-based integrations when many cloned VMs need the same repo access.
 
+## Git commit signing
+
+Linux devboxes can sign commits with your local 1Password SSH key via SSH agent forwarding.
+
+Local SSH config should enable forwarding for trusted named devboxes only:
+
+```sshconfig
+Host dotfiles-base
+  HostName <base-vm>.exe.xyz
+  User exedev
+  ForwardAgent yes
+```
+
+On the VM, `install/linux.sh` enables Git SSH signing only when this file exists:
+
+```text
+~/.config/git/signing_key.pub
+```
+
+That file contains the public signing key only. The private key stays on the local machine in 1Password. Signing works only while connected with agent forwarding.
+
+Check forwarding:
+
+```sh
+ssh dotfiles-base 'echo $SSH_AUTH_SOCK && ssh-add -L'
+```
+
+Do not enable agent forwarding or personal signing keys on production VMs.
+
 ## AI/Pi login
 
 Pi is installed by the Linux installer.
