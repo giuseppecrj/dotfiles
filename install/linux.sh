@@ -203,15 +203,21 @@ if command -v zsh >/dev/null 2>&1 && [ "${SHELL:-}" != "$(command -v zsh)" ]; th
         echo "Login shell is still ${SHELL:-unknown}; using ~/.bash_profile zsh handoff."
     fi
 
-    if ! grep -q "dotfiles zsh handoff" "$HOME/.bash_profile" 2>/dev/null; then
-        cat >> "$HOME/.bash_profile" <<'EOF'
+    for bash_startup in "$HOME/.bash_profile" "$HOME/.bashrc"; do
+        if ! grep -q "dotfiles zsh handoff" "$bash_startup" 2>/dev/null; then
+            cat >> "$bash_startup" <<'EOF'
 
 # dotfiles zsh handoff
-if [ -t 1 ] && command -v zsh >/dev/null 2>&1; then
-    exec zsh -l
-fi
+case $- in
+    *i*)
+        if [ -t 1 ] && command -v zsh >/dev/null 2>&1; then
+            exec zsh -l
+        fi
+        ;;
+esac
 EOF
-    fi
+        fi
+    done
 fi
 
 echo "Linux devbox setup complete."
