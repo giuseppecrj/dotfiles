@@ -4,13 +4,13 @@ This repo supports exe.dev as the default cloud development workflow.
 
 ## Mental model
 
-- `dotfiles-base` is the golden devbox.
-- New development VMs should be cloned from `dotfiles-base` with exe.dev `cp`.
-- Do real project work in disposable clones, not in `dotfiles-base`.
+- `devbase` is the golden devbox.
+- New development VMs should be cloned from `devbase` with exe.dev `cp`.
+- Do real project work in disposable clones, not in `devbase`.
 - Keep production VMs separate from personal/dev VMs.
 
 ```text
-dotfiles-base
+devbase
   ├── project-feature-a
   ├── bug-repro-b
   └── agent-task-c
@@ -21,7 +21,7 @@ dotfiles-base
 SSH alias expected on the local machine:
 
 ```sshconfig
-Host dotfiles-base
+Host devbase
   HostName <base-vm>.exe.xyz
   User exedev
 ```
@@ -29,7 +29,7 @@ Host dotfiles-base
 Then connect with:
 
 ```sh
-ssh dotfiles-base
+ssh devbase
 ```
 
 Or use the shell alias:
@@ -41,7 +41,7 @@ devbase
 ## Open the base devbox in Cursor
 
 ```sh
-cursor --remote ssh-remote+dotfiles-base /home/exedev
+cursor --remote ssh-remote+devbase /home/exedev
 ```
 
 Or use the shell alias:
@@ -55,7 +55,7 @@ cursor-devbase
 Preferred flow:
 
 ```sh
-ssh exe.dev 'cp dotfiles-base my-feature'
+ssh exe.dev 'cp devbase my-feature'
 ssh my-feature.exe.xyz
 ```
 
@@ -89,13 +89,13 @@ exedev-update-base
 Equivalent manual flow:
 
 ```sh
-ssh dotfiles-base
+ssh devbase
 cd ~/dotfiles
 git pull --ff-only
 ./install.sh
 ```
 
-After updating `dotfiles-base`, future clones inherit the updated setup.
+After updating `devbase`, future clones inherit the updated setup.
 
 ## Fresh VM bootstrap
 
@@ -133,7 +133,7 @@ ssh exe.dev 'integrations setup github'
 After browser setup, create per-repo integrations, for example:
 
 ```sh
-ssh exe.dev 'integrations add github --name myrepo --repository owner/myrepo --attach vm:dotfiles-base'
+ssh exe.dev 'integrations add github --name myrepo --repository owner/myrepo --attach vm:devbase'
 ```
 
 Prefer tag-based integrations when many cloned VMs need the same repo access.
@@ -145,7 +145,7 @@ Linux devboxes can sign commits with your local 1Password SSH key via SSH agent 
 Local SSH config should enable forwarding for trusted named devboxes only:
 
 ```sshconfig
-Host dotfiles-base
+Host devbase
   HostName <base-vm>.exe.xyz
   User exedev
   ForwardAgent yes
@@ -162,7 +162,7 @@ That file contains the public signing key only. The private key stays on the loc
 Check forwarding:
 
 ```sh
-ssh dotfiles-base 'echo $SSH_AUTH_SOCK && ssh-add -L'
+ssh devbase 'echo $SSH_AUTH_SOCK && ssh-add -L'
 ```
 
 Do not enable agent forwarding or personal signing keys on production VMs.
@@ -178,17 +178,17 @@ pi
 /login
 ```
 
-If Pi auth is stored on `dotfiles-base`, cloned VMs inherit it. That is convenient for personal dev clones, but do not copy personal AI auth into production VMs.
+If Pi auth is stored on `devbase`, cloned VMs inherit it. That is convenient for personal dev clones, but do not copy personal AI auth into production VMs.
 
 ## Dev vs production
 
 Recommended separation:
 
-- Dev: clone from `dotfiles-base`, code directly over SSH/Cursor, use `mise` tooling.
-- Test/prototype: clone disposable VMs from `dotfiles-base`.
+- Dev: clone from `devbase`, code directly over SSH/Cursor, use `mise` tooling.
+- Test/prototype: clone disposable VMs from `devbase`.
 - Production: use separate prod VMs, preferably Docker/Compose plus systemd and exe.dev HTTPS/custom domains.
 
-Do not use `dotfiles-base` for production.
+Do not use `devbase` for production.
 
 Future production base idea:
 
@@ -214,4 +214,4 @@ Remove a disposable VM:
 ssh exe.dev 'rm my-feature'
 ```
 
-Keep `dotfiles-base` unless intentionally rebuilding it.
+Keep `devbase` unless intentionally rebuilding it.

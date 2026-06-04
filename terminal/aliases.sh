@@ -17,8 +17,8 @@ alias buou="brewup"
 alias foundryconfig="code ~/.foundry"
 alias cls='printf "\033c"'
 alias bunx='bun x'
-alias devbase='ssh dotfiles-base'
-alias cursor-devbase='cursor --remote ssh-remote+dotfiles-base /home/exedev'
+alias devbase='ssh devbase'
+alias cursor-devbase='cursor --remote ssh-remote+devbase /home/exedev'
 
 # cd
 alias home="cd ~"

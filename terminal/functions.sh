@@ -118,7 +118,7 @@ function exedev-cp() {
   fi
 
   local new_vm="$1"
-  local base_vm="${2:-dotfiles-base}"
+  local base_vm="${2:-devbase}"
 
   ssh exe.dev "cp ${base_vm} ${new_vm}"
 }
@@ -137,7 +137,7 @@ function exedev-cursor() {
 }
 
 function exedev-update-base() {
-  ssh dotfiles-base 'cd ~/dotfiles && git pull --ff-only && ./install.sh'
+  ssh devbase 'cd ~/dotfiles && git pull --ff-only && ./install.sh'
 }
 
 function selectors() {
