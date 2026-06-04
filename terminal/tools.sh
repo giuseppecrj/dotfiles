@@ -8,7 +8,7 @@
 command -v wt >/dev/null && eval "$(wt config shell init zsh)"
 
 # fzf shell integration
-if command -v fzf >/dev/null; then
+if command -v fzf >/dev/null && [[ -o interactive && -t 1 ]]; then
     source <(fzf --zsh)
 fi
 

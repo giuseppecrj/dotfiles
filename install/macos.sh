@@ -305,8 +305,8 @@ fi
 # node.sh [START]
 echo "Installing dev runtimes with mise..."
 # Install latest Node.js, Go, aube, and fnox; set global defaults
-mise install node@latest go@latest aube@latest fnox@latest
-mise use -g node@latest go@latest aube@latest fnox@latest
+mise install node@latest go@latest bun@latest aube@latest fnox@latest
+mise use -g node@latest go@latest bun@latest aube@latest fnox@latest
 eval "$(mise activate bash)"
 
 echo "Installing global npm tools..."
