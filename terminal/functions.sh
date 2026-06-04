@@ -118,7 +118,7 @@ function exedev-cp() {
   fi
 
   local new_vm="$1"
-  local base_vm="${2:-devbase}"
+  local base_vm="${2:-giuseppecrj-devbase}"
 
   ssh exe.dev "cp ${base_vm} ${new_vm}"
 }

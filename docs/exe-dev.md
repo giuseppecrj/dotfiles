@@ -4,13 +4,14 @@ This repo supports exe.dev as the default cloud development workflow.
 
 ## Mental model
 
-- `devbase` is the golden devbox.
-- New development VMs should be cloned from `devbase` with exe.dev `cp`.
-- Do real project work in disposable clones, not in `devbase`.
+- `giuseppecrj-devbase` is the golden exe.dev VM.
+- `devbase` is the local SSH alias for that VM.
+- New development VMs should be cloned from `giuseppecrj-devbase` with exe.dev `cp`.
+- Do real project work in disposable clones, not in the base VM.
 - Keep production VMs separate from personal/dev VMs.
 
 ```text
-devbase
+giuseppecrj-devbase
   ├── project-feature-a
   ├── bug-repro-b
   └── agent-task-c
@@ -55,7 +56,7 @@ cursor-devbase
 Preferred flow:
 
 ```sh
-ssh exe.dev 'cp devbase my-feature'
+ssh exe.dev 'cp giuseppecrj-devbase my-feature'
 ssh my-feature.exe.xyz
 ```
 
@@ -95,7 +96,7 @@ git pull --ff-only
 ./install.sh
 ```
 
-After updating `devbase`, future clones inherit the updated setup.
+After updating `giuseppecrj-devbase`, future clones inherit the updated setup.
 
 ## Fresh VM bootstrap
 
@@ -133,7 +134,7 @@ ssh exe.dev 'integrations setup github'
 After browser setup, create per-repo integrations, for example:
 
 ```sh
-ssh exe.dev 'integrations add github --name myrepo --repository owner/myrepo --attach vm:devbase'
+ssh exe.dev 'integrations add github --name myrepo --repository owner/myrepo --attach vm:giuseppecrj-devbase'
 ```
 
 Prefer tag-based integrations when many cloned VMs need the same repo access.
@@ -178,17 +179,17 @@ pi
 /login
 ```
 
-If Pi auth is stored on `devbase`, cloned VMs inherit it. That is convenient for personal dev clones, but do not copy personal AI auth into production VMs.
+If Pi auth is stored on `giuseppecrj-devbase`, cloned VMs inherit it. That is convenient for personal dev clones, but do not copy personal AI auth into production VMs.
 
 ## Dev vs production
 
 Recommended separation:
 
-- Dev: clone from `devbase`, code directly over SSH/Cursor, use `mise` tooling.
-- Test/prototype: clone disposable VMs from `devbase`.
+- Dev: clone from `giuseppecrj-devbase`, code directly over SSH/Cursor, use `mise` tooling.
+- Test/prototype: clone disposable VMs from `giuseppecrj-devbase`.
 - Production: use separate prod VMs, preferably Docker/Compose plus systemd and exe.dev HTTPS/custom domains.
 
-Do not use `devbase` for production.
+Do not use `giuseppecrj-devbase` for production.
 
 Future production base idea:
 
@@ -214,4 +215,4 @@ Remove a disposable VM:
 ssh exe.dev 'rm my-feature'
 ```
 
-Keep `devbase` unless intentionally rebuilding it.
+Keep `giuseppecrj-devbase` unless intentionally rebuilding it.
