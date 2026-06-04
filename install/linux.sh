@@ -68,10 +68,10 @@ fi
 ln -sfn "$ZSH_CUSTOM_DIR/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM_DIR/themes/spaceship.zsh-theme"
 
 echo "Installing mise..."
+export PATH="$HOME/.local/bin:$PATH"
 if ! command -v mise >/dev/null 2>&1; then
     curl https://mise.run | sh
 fi
-export PATH="$HOME/.local/bin:$PATH"
 eval "$(mise activate bash)"
 
 echo "Installing dev runtimes with mise..."
@@ -107,7 +107,11 @@ if [ -d "$DOTFILES_DIR/fonts" ]; then
 fi
 
 if command -v zsh >/dev/null 2>&1 && [ "${SHELL:-}" != "$(command -v zsh)" ]; then
-    chsh -s "$(command -v zsh)" 2>/dev/null || echo "Could not change login shell; run: chsh -s $(command -v zsh)"
+    if [ -t 0 ]; then
+        chsh -s "$(command -v zsh)" || echo "Could not change login shell; run: chsh -s $(command -v zsh)"
+    else
+        echo "Login shell is still ${SHELL:-unknown}; run interactively if desired: chsh -s $(command -v zsh)"
+    fi
 fi
 
 echo "Linux devbox setup complete."
