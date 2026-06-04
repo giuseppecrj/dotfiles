@@ -106,6 +106,36 @@ function tunnel() {
   # ssh -i ~/.ssh/at-tunnel -N -R *:$1:localhost:$1 g@35.230.81.169
 }
 
+function exedev-cp() {
+  if [ -z "$1" ]; then
+    echo "Usage: exedev-cp <new-vm-name> [base-vm-name]"
+    echo "Example: exedev-cp my-feature"
+    return 1
+  fi
+
+  local new_vm="$1"
+  local base_vm="${2:-dotfiles-base}"
+
+  ssh exe.dev "cp ${base_vm} ${new_vm}"
+}
+
+function exedev-cursor() {
+  if [ -z "$1" ]; then
+    echo "Usage: exedev-cursor <vm-name> [path]"
+    echo "Example: exedev-cursor my-feature /home/exedev"
+    return 1
+  fi
+
+  local vm_name="$1"
+  local remote_path="${2:-/home/exedev}"
+
+  cursor --remote "ssh-remote+${vm_name}.exe.xyz" "$remote_path"
+}
+
+function exedev-update-base() {
+  ssh dotfiles-base 'cd ~/dotfiles && git pull --ff-only && ./install.sh'
+}
+
 function selectors() {
   if [ -z "$1" ]; then
     echo "Usage: selectors <ContractName>"
