@@ -25,7 +25,15 @@ FPATH="/opt/homebrew/share/zsh/site-functions:${FPATH}"
 fpath=(~/.grok/completions/zsh $fpath)
 
 # Oh My Zsh
-ZSH_THEME="spaceship"
+ZSH_CUSTOM="${ZSH_CUSTOM:-$ZSH/custom}"
+if [[ -f "$ZSH_CUSTOM/themes/spaceship.zsh-theme" || -f "$ZSH/themes/spaceship.zsh-theme" ]]; then
+    ZSH_THEME="spaceship"
+elif [[ -f /opt/homebrew/opt/spaceship/spaceship.zsh ]]; then
+    # Homebrew installs Spaceship as a prompt script, not an Oh My Zsh theme.
+    ZSH_THEME=""
+else
+    ZSH_THEME="robbyrussell"
+fi
 SPACESHIP_SHOW_BATTERY="false"
 SPACESHIP_GCLOUD_SHOW="false"
 SPACESHIP_PROMPT_ASYNC="false"
@@ -36,7 +44,9 @@ source_if_exists() {
 }
 
 source_if_exists "$HOME/.oh-my-zsh/oh-my-zsh.sh"
-source_if_exists /opt/homebrew/opt/spaceship/spaceship.zsh
+if [[ "$ZSH_THEME" != "spaceship" ]]; then
+    source_if_exists /opt/homebrew/opt/spaceship/spaceship.zsh
+fi
 
 # Terminal customizations
 source_if_exists "$HOME/dotfiles/terminal/prompt.sh"

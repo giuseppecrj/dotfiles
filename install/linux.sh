@@ -77,6 +77,7 @@ eval "$(mise activate bash)"
 echo "Installing dev runtimes with mise..."
 mise install node@latest go@latest bun@latest aube@latest fnox@latest
 mise use -g node@latest go@latest bun@latest aube@latest fnox@latest
+eval "$(mise activate bash)"
 
 echo "Installing global npm tools..."
 npm install -g \
