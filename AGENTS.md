@@ -15,6 +15,7 @@ Key files:
 - `terminal/prompt.sh` — prompt-related overrides only.
 - `terminal/tools.sh` — executable tool initializers and shell integrations.
 - Local SSH config may define `dotfiles-base` as an alias for `dotfiles-base.exe.xyz`; repo helpers assume that alias exists.
+- `docs/exe-dev.md` — human operating guide for exe.dev development, cloning, Cursor, GitHub integrations, and future production separation.
 - `install.sh` — small OS dispatcher.
 - `install/macos.sh` — macOS/laptop bootstrap installer.
 - `install/linux.sh` — Linux/cloud-dev bootstrap installer, suitable for exe.dev-style VMs.
@@ -54,6 +55,8 @@ Do not reintroduce `hooks.sh`; its previous contents belong in `terminal/tools.s
 ## Tool initializer conventions
 
 Exe.dev helper conventions:
+
+For human operating procedures, read `docs/exe-dev.md`.
 
 - `devbase` and `cursor-devbase` aliases live in `terminal/aliases.sh`.
 - `exedev-cp`, `exedev-cursor`, and `exedev-update-base` functions live in `terminal/functions.sh`.
