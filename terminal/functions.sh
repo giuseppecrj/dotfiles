@@ -110,6 +110,16 @@ function tunnel() {
   echo "Start tunnel for: $1"
 }
 
+function exedev-base-vm() {
+  if [ -n "${EXEDEV_BASE_VM:-}" ]; then
+    echo "$EXEDEV_BASE_VM"
+  elif [ -f "$HOME/.config/dotfiles/exedev-base" ]; then
+    cat "$HOME/.config/dotfiles/exedev-base"
+  else
+    return 1
+  fi
+}
+
 function exedev-cp() {
   if [ -z "$1" ]; then
     echo "Usage: exedev-cp <new-vm-name> [base-vm-name]"
@@ -118,7 +128,12 @@ function exedev-cp() {
   fi
 
   local new_vm="$1"
-  local base_vm="${2:-giuseppecrj-devbase}"
+  local base_vm="${2:-$(exedev-base-vm)}"
+
+  if [ -z "$base_vm" ]; then
+    echo "Base VM not configured. Set EXEDEV_BASE_VM or write ~/.config/dotfiles/exedev-base."
+    return 1
+  fi
 
   ssh exe.dev "cp ${base_vm} ${new_vm}"
 }

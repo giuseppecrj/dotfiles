@@ -117,8 +117,10 @@ touch "$HOME/.gitignore"
 grep -qxF ".secrets.env" "$HOME/.gitignore" || echo ".secrets.env" >> "$HOME/.gitignore"
 grep -qxF ".DS_Store" "$HOME/.gitignore" || echo ".DS_Store" >> "$HOME/.gitignore"
 
-git config --global user.name "g"
-git config --global user.email "5714678+giuseppecrj@users.noreply.github.com"
+git_user_name="${DOTFILES_GIT_NAME:-$(git config --global user.name 2>/dev/null || true)}"
+git_user_email="${DOTFILES_GIT_EMAIL:-$(git config --global user.email 2>/dev/null || true)}"
+git config --global user.name "${git_user_name:-Developer}"
+git config --global user.email "${git_user_email:-devbox@example.invalid}"
 git config --global color.ui auto
 git config --global init.defaultBranch main
 
