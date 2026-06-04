@@ -4,7 +4,7 @@ Guidance for AI coding agents working in this dotfiles repo.
 
 ## Project shape
 
-This repo manages personal macOS shell setup and bootstrap scripts.
+This repo manages personal macOS and Linux/cloud-dev shell setup and bootstrap scripts.
 
 Key files:
 
@@ -14,7 +14,9 @@ Key files:
 - `terminal/functions.sh` — shell functions only.
 - `terminal/prompt.sh` — prompt-related overrides only.
 - `terminal/tools.sh` — executable tool initializers and shell integrations.
-- `install.sh` — macOS/bootstrap installer.
+- `install.sh` — small OS dispatcher.
+- `install/macos.sh` — macOS/laptop bootstrap installer.
+- `install/linux.sh` — Linux/cloud-dev bootstrap installer, suitable for exe.dev-style VMs.
 - `bin/` — helper executables.
 - `fonts/` — font assets installed by `install.sh`.
 
@@ -32,7 +34,7 @@ Use `env.sh` as the main readable config file with explicit comment sections. Do
 Expected `env.sh` responsibilities:
 
 - static environment exports
-- Homebrew shell variables
+- OS-specific guarded environment exports, such as macOS Homebrew variables
 - PATH setup
 - completion path setup that must happen before oh-my-zsh/compinit
 - oh-my-zsh theme/plugin setup
@@ -63,14 +65,19 @@ Guard each integration with `command -v ... >/dev/null` or file-exists checks so
 
 ## Install script conventions
 
-`install.sh` should be idempotent where practical:
+`install.sh` should stay a tiny dispatcher. Put OS-specific behavior in:
 
-- use helper functions like `install_formula` and `install_cask`
+- `install/macos.sh` for macOS-only setup: Homebrew casks, Xcode, App Store, macOS defaults, `/Applications`, `~/Library/Fonts`.
+- `install/linux.sh` for Linux/cloud-dev setup: apt packages, mise runtimes, Linux font path, zsh setup.
+
+Installers should be idempotent where practical:
+
+- use helper functions like `install_formula`, `install_cask`, or `install_apt_package`
 - avoid failing when optional setup is already complete
 - keep symlink setup aligned with current file structure
 - do not link removed files such as `hooks.sh`
 
-When changing shell files, update `install.sh` if symlinks or installed dependencies change.
+When changing shell files, update the relevant OS installer if symlinks or installed dependencies change.
 
 ## Removed/undesired items
 
@@ -83,7 +90,7 @@ Avoid adding editor-specific assumptions unless the user asks. Existing aliases 
 After shell/bootstrap changes, run:
 
 ```bash
-bash -n install.sh
+bash -n install.sh install/macos.sh install/linux.sh
 zsh -n .zshrc env.sh terminal/aliases.sh terminal/functions.sh terminal/prompt.sh terminal/tools.sh
 ```
 

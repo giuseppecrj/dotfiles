@@ -1,17 +1,19 @@
 # Environment
 export CLICOLOR=1
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export ZSH=$HOME/.oh-my-zsh
 export GPG_TTY=$(tty)
 
 # Homebrew
-# Hardcoded for Apple Silicon, avoids slow eval "$(brew shellenv)".
-export HOMEBREW_PREFIX=/opt/homebrew
-export HOMEBREW_CELLAR=/opt/homebrew/Cellar
-export HOMEBREW_REPOSITORY=/opt/homebrew
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:"
-export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
+# macOS-only; hardcoded for Apple Silicon to avoid slow eval "$(brew shellenv)".
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+    export HOMEBREW_PREFIX=/opt/homebrew
+    export HOMEBREW_CELLAR=/opt/homebrew/Cellar
+    export HOMEBREW_REPOSITORY=/opt/homebrew
+    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+    export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:"
+    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
+fi
 
 # PATH
 export PATH="$HOME/.opencode/bin:$HOME/.grok/bin:$HOME/.local/bin:$HOME/.foundry/bin:$PATH"
