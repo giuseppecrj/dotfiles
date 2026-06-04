@@ -14,7 +14,7 @@ Key files:
 - `terminal/functions.sh` — shell functions only.
 - `terminal/prompt.sh` — prompt-related overrides only.
 - `terminal/tools.sh` — executable tool initializers and shell integrations.
-- Local SSH config may define `dotfiles-base` as an alias for `dotfiles-base.exe.xyz`; repo helpers assume that alias exists.
+- Local SSH config may define `dotfiles-base` as an alias for the base exe.dev VM; repo helpers assume that alias exists.
 - `docs/exe-dev.md` — human operating guide for exe.dev development, cloning, Cursor, GitHub integrations, and future production separation.
 - `install.sh` — small OS dispatcher.
 - `install/macos.sh` — macOS/laptop bootstrap installer.

@@ -1,1 +1,18 @@
 .DS_Store
+
+# Local secrets and credentials
+.secrets.env
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+
+# Local editor/tool state
+.vscode/
+.idea/
+.pi/agent/auth.json

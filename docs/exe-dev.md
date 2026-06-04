@@ -22,7 +22,7 @@ SSH alias expected on the local machine:
 
 ```sshconfig
 Host dotfiles-base
-  HostName dotfiles-base.exe.xyz
+  HostName <base-vm>.exe.xyz
   User exedev
 ```
 

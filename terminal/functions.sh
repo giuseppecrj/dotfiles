@@ -102,8 +102,12 @@ function tre() {
 }
 
 function tunnel() {
-  echo "Starting an ssh tunnel. Public address: https://mgv.io:$1"
-  # ssh -i ~/.ssh/at-tunnel -N -R *:$1:localhost:$1 g@35.230.81.169
+  if [ -z "$1" ]; then
+    echo "Usage: tunnel <public-url-or-host>"
+    return 1
+  fi
+
+  echo "Start tunnel for: $1"
 }
 
 function exedev-cp() {
