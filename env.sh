@@ -3,7 +3,6 @@ export VISUAL="open -a Warp -W"
 export CLICOLOR=1
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export ZSH=$HOME/.oh-my-zsh
-export PYENV_ROOT=$HOME/.pyenv
 export GPG_TTY=$(tty)
 
 # Homebrew — hardcoded for Apple Silicon, avoids slow eval "$(brew shellenv)"
@@ -16,8 +15,6 @@ export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
 
 # Brew completions must be in FPATH before compinit (which oh-my-zsh runs)
 FPATH="/opt/homebrew/share/zsh/site-functions:${FPATH}"
-
-FNM_USING_LOCAL_VERSION=0
 
 ZSH_THEME="spaceship"
 SPACESHIP_SHOW_BATTERY="false"
@@ -33,9 +30,6 @@ for file in "$HOME"/dotfiles/terminal/*.sh; do
 done
 
 # Tool initializers
-command -v rbenv >/dev/null && eval "$(rbenv init -)"
-command -v fnm >/dev/null && eval "$(fnm env --use-on-cd)"
-command -v pyenv >/dev/null && eval "$(pyenv init -)"
 command -v wt >/dev/null && eval "$(wt config shell init zsh)"
 
 if command -v fzf >/dev/null; then
@@ -55,7 +49,18 @@ source_if_exists "$HOME/.secrets.env"
 source_if_exists "$HOME/.cargo/env"
 source_if_exists "$HOME/dotfiles/hooks.sh"
 [[ -f /opt/homebrew/opt/spaceship/spaceship.zsh ]] && source /opt/homebrew/opt/spaceship/spaceship.zsh
-[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
-
 # PATH
-export PATH="$HOME/.local/bin:$HOME/.bun/bin:$HOME/.foundry/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.foundry/bin:$PATH"
+
+#compdef atlas
+_incur_complete_atlas() {
+    local completions=("${(@f)$(
+        export _COMPLETE_INDEX=$(( CURRENT - 1 ))
+        export COMPLETE="zsh"
+        "atlas" -- "${words[@]}" 2>/dev/null
+    )}")
+    if [[ -n $completions ]]; then
+        _describe 'values' completions -S ''
+    fi
+}
+compdef _incur_complete_atlas atlas

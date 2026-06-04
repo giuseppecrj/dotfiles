@@ -95,23 +95,25 @@ brew tap withgraphite/tap
 
 echo "Installing CLI tools with Homebrew..."
 formulae=(
-    asdf
+    age
     awk
     buf
     chezmoi
     cloudflared
     ffmpeg
-    fnm
     gh
     go
     jq
     just
     lcov
     mas
+    mise
     mole
+    pkl
     pnpm
     ripgrep
     rust
+    spaceship
     tree
     uv
     yarn
@@ -306,13 +308,15 @@ fi
 # bun.sh [END]
 
 # node.sh [START]
-echo "Installing nodeJS..."
-eval "$(fnm env --use-on-cd)"
-for node_version in 18 20 22 24; do
-    fnm install "$node_version"
-done
-fnm default 22
-fnm use default
+echo "Installing dev runtimes with mise..."
+# Install latest Node.js, Go, aube, and fnox; set global defaults
+mise install node@latest go@latest aube@latest fnox@latest
+mise use -g node@latest go@latest aube@latest fnox@latest
+
+if [ -f "$HOME/.zshrc" ]; then
+    # shellcheck disable=SC1090
+    source "$HOME/.zshrc"
+fi
 
 echo "Installing global npm tools..."
 npm install -g \
@@ -325,6 +329,8 @@ corepack enable || true
 # node.sh [END]
 
 # go.sh [START]
+cd "$HOME"
+
 echo "Install Go tools..."
 go install golang.org/x/tools/gopls@latest
 # go.sh [END]
