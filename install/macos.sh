@@ -89,7 +89,6 @@ echo "Updating Homebrew Repository..."
 brew update
 
 echo "Installing Homebrew taps..."
-brew tap oven-sh/bun
 brew tap tenderly/tenderly
 brew tap withgraphite/tap
 
@@ -119,7 +118,6 @@ formulae=(
     yarn
     yq
     zoxide
-    oven-sh/bun/bun@1.3.3
     tenderly/tenderly/tenderly
     withgraphite/tap/graphite
 )

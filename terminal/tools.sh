@@ -1,9 +1,6 @@
 # Tool initializers
 # Keep executable startup hooks isolated so shell startup is easier to debug.
 
-# Bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
 # wt CLI shell integration
 command -v wt >/dev/null && eval "$(wt config shell init zsh)"
 
