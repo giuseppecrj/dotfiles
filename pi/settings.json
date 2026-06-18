@@ -4,7 +4,11 @@
   "defaultModel": "gpt-5.5",
   "defaultThinkingLevel": "medium",
   "packages": [
-    "../../code/pi-engineering-workflow"
+    "npm:@hypabolic/pi-hypa",
+    "npm:pi-subagents",
+    "npm:pi-intercom",
+    "npm:pi-web-access",
+    "npm:pi-lens"
   ],
   "theme": "dark",
   "defaultProjectTrust": "always"
