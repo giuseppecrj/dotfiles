@@ -8,7 +8,7 @@ alias s='code .'
 alias dps="docker ps"
 alias krrd="kubectl rollout restart deployment"
 alias checkLocal="sudo lsof -i tcp:80"
-alias finit="forge init --template giuseppecrj/forge-template-base && aube"
+alias finit="forge init --template https://github.com/giuseppecrj/foundry-bun && mise install"
 nuke() {
   git fetch -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'); do git branch -D "$branch"; done
 }
