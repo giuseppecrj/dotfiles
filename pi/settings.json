@@ -8,6 +8,7 @@
     "npm:pi-subagents",
     "npm:pi-intercom",
     "npm:pi-web-access",
+    "npm:pi-hermes-memory",
     "npm:pi-lens"
   ],
   "theme": "dark",
