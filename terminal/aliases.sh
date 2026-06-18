@@ -1,10 +1,10 @@
-# Cursor
-alias gitignore='code ~/.gitignore'
-alias zshconfig="code ~/dotfiles/.zshrc"
-alias envconfig="code ~/dotfiles/env.sh"
-alias sshconfig="code ~/.ssh"
-alias aliases="code ~/dotfiles/terminal/aliases.sh"
-alias s='code .'
+# Editor
+alias gitignore='zed ~/.gitignore'
+alias zshconfig="zed ~/dotfiles/.zshrc"
+alias envconfig="zed ~/dotfiles/env.sh"
+alias sshconfig="zed ~/.ssh"
+alias aliases="zed ~/dotfiles/terminal/aliases.sh"
+alias s='zed .'
 alias dps="docker ps"
 alias krrd="kubectl rollout restart deployment"
 alias checkLocal="sudo lsof -i tcp:80"
@@ -14,11 +14,9 @@ nuke() {
 }
 alias brewup="brew update && brew outdated && brew upgrade"
 alias buou="brewup"
-alias foundryconfig="code ~/.foundry"
+alias foundryconfig="zed ~/.foundry"
 alias cls='printf "\033c"'
 alias bunx='bun x'
-alias devbase='ssh devbase'
-alias cursor-devbase='cursor --remote ssh-remote+devbase /home/exedev'
 
 # cd
 alias home="cd ~"

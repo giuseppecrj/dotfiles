@@ -15,7 +15,7 @@ Key files:
 - `terminal/prompt.sh` — prompt-related overrides only.
 - `terminal/tools.sh` — executable tool initializers and shell integrations.
 - Local SSH config may define `devbase` as an alias for the base exe.dev VM; repo helpers assume that alias exists.
-- `docs/exe-dev.md` — human operating guide for exe.dev development, cloning, Cursor, GitHub integrations, and future production separation.
+- `docs/exe-dev.md` — human operating guide for exe.dev development, cloning, Zed, GitHub integrations, and future production separation.
 - `install.sh` — small OS dispatcher.
 - `install/macos.sh` — macOS/laptop bootstrap installer.
 - `install/linux.sh` — Linux/cloud-dev bootstrap installer, suitable for exe.dev-style VMs.
@@ -58,8 +58,7 @@ Exe.dev helper conventions:
 
 For human operating procedures, read `docs/exe-dev.md`.
 
-- `devbase` and `cursor-devbase` aliases live in `terminal/aliases.sh`.
-- `exedev-cp`, `exedev-cursor`, and `exedev-update-base` functions live in `terminal/functions.sh`.
+- `devbase`, `zed-devbase`, `exedev-cp`, `exedev-zed`, and `exedev-update-base` functions live in `terminal/functions.sh`.
 - Keep `devbase` as the clean golden devbox; use `exedev-cp <name>` for disposable project/task VMs.
 
 Put executable shell integrations in `terminal/tools.sh`, for example:
@@ -93,7 +92,7 @@ When changing shell files, update the relevant OS installer if symlinks or insta
 
 Terminal-emulator-specific setup has intentionally been removed. Do not add app-specific terminal paths, casks, or editor settings unless explicitly requested.
 
-Avoid adding editor-specific assumptions unless the user asks. Existing aliases may use `code`, but do not expand editor coupling without confirmation.
+Avoid adding editor-specific assumptions unless the user asks. Existing aliases use `zed` for opening files; do not expand editor coupling without confirmation.
 
 ## Validation before finishing
 

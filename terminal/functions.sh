@@ -120,6 +120,28 @@ function exedev-base-vm() {
   fi
 }
 
+function devbase() {
+  local base_vm="$(exedev-base-vm)"
+
+  if [ -z "$base_vm" ]; then
+    echo "Base VM not configured. Set EXEDEV_BASE_VM or write ~/.config/dotfiles/exedev-base."
+    return 1
+  fi
+
+  ssh "${base_vm}.exe.xyz"
+}
+
+function zed-devbase() {
+  local base_vm="$(exedev-base-vm)"
+
+  if [ -z "$base_vm" ]; then
+    echo "Base VM not configured. Set EXEDEV_BASE_VM or write ~/.config/dotfiles/exedev-base."
+    return 1
+  fi
+
+  zed "ssh://${base_vm}.exe.xyz/home/exedev"
+}
+
 function exedev-cp() {
   if [ -z "$1" ]; then
     echo "Usage: exedev-cp <new-vm-name> [base-vm-name]"
@@ -138,21 +160,28 @@ function exedev-cp() {
   ssh exe.dev "cp ${base_vm} ${new_vm}"
 }
 
-function exedev-cursor() {
+function exedev-zed() {
   if [ -z "$1" ]; then
-    echo "Usage: exedev-cursor <vm-name> [path]"
-    echo "Example: exedev-cursor my-feature /home/exedev"
+    echo "Usage: exedev-zed <vm-name> [path]"
+    echo "Example: exedev-zed my-feature /home/exedev"
     return 1
   fi
 
   local vm_name="$1"
   local remote_path="${2:-/home/exedev}"
 
-  cursor --remote "ssh-remote+${vm_name}.exe.xyz" "$remote_path"
+  zed "ssh://${vm_name}.exe.xyz${remote_path}"
 }
 
 function exedev-update-base() {
-  ssh devbase 'cd ~/dotfiles && git pull --ff-only && ./install.sh'
+  local base_vm="$(exedev-base-vm)"
+
+  if [ -z "$base_vm" ]; then
+    echo "Base VM not configured. Set EXEDEV_BASE_VM or write ~/.config/dotfiles/exedev-base."
+    return 1
+  fi
+
+  ssh "${base_vm}.exe.xyz" 'cd ~/dotfiles && git pull --ff-only && ./install.sh'
 }
 
 function selectors() {
