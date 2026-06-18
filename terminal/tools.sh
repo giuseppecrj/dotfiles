@@ -23,17 +23,3 @@ fi
 if command -v fnox >/dev/null; then
     eval "$(fnox activate zsh)"
 fi
-
-# atlas completions
-#compdef atlas
-_incur_complete_atlas() {
-    local completions=("${(@f)$(
-        export _COMPLETE_INDEX=$(( CURRENT - 1 ))
-        export COMPLETE="zsh"
-        "atlas" -- "${words[@]}" 2>/dev/null
-    )}")
-    if [[ -n $completions ]]; then
-        _describe 'values' completions -S ''
-    fi
-}
-compdef _incur_complete_atlas atlas
