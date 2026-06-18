@@ -94,9 +94,10 @@ go install golang.org/x/tools/gopls@latest
 echo "Linking dotfiles..."
 ln -sfn "$DOTFILES_DIR/env.sh" "$HOME/env.sh"
 ln -sfn "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
-mkdir -p "$HOME/.config/zed/themes"
+mkdir -p "$HOME/.config/zed/themes" "$HOME/.pi/agent"
 ln -sfn "$DOTFILES_DIR/zed/settings.json" "$HOME/.config/zed/settings.json"
 ln -sfn "$DOTFILES_DIR/zed/themes/better-itg-flat-dark.json" "$HOME/.config/zed/themes/better-itg-flat-dark.json"
+ln -sfn "$DOTFILES_DIR/pi/settings.json" "$HOME/.pi/agent/settings.json"
 if [ -L "$HOME/hooks.sh" ]; then
     rm "$HOME/hooks.sh"
 elif [ -e "$HOME/hooks.sh" ]; then

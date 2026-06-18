@@ -1,0 +1,11 @@
+{
+  "lastChangelogVersion": "0.79.6",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5",
+  "defaultThinkingLevel": "medium",
+  "packages": [
+    "../../code/pi-engineering-workflow"
+  ],
+  "theme": "dark",
+  "defaultProjectTrust": "always"
+}
