@@ -23,6 +23,7 @@ Key files:
 - `install/macos.sh` — macOS/laptop bootstrap installer.
 - `install/linux.sh` — Linux/cloud-dev bootstrap installer, suitable for
   exe.dev-style VMs.
+- `pi/skills/` — global Pi skills linked into `~/.pi/agent/skills`.
 - `bin/` — helper executables.
 - `fonts/` — font assets installed by `install.sh`.
 

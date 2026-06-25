@@ -97,9 +97,17 @@ go install golang.org/x/tools/gopls@latest
 echo "Linking dotfiles..."
 ln -sfn "$DOTFILES_DIR/env.sh" "$HOME/env.sh"
 ln -sfn "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
-mkdir -p "$HOME/.pi/agent"
+mkdir -p "$DOTFILES_DIR/pi/skills" "$HOME/.pi/agent"
 rm -f "$HOME/.pi/agent/settings.json"
 ln -sfn "$DOTFILES_DIR/pi/settings.json" "$HOME/.pi/agent/settings.json"
+if [ -L "$HOME/.pi/agent/skills" ]; then
+	rm "$HOME/.pi/agent/skills"
+fi
+if [ -e "$HOME/.pi/agent/skills" ]; then
+	echo "Leaving existing non-symlink in place: $HOME/.pi/agent/skills"
+else
+	ln -s "$DOTFILES_DIR/pi/skills" "$HOME/.pi/agent/skills"
+fi
 if [ -L "$HOME/hooks.sh" ]; then
 	rm "$HOME/hooks.sh"
 elif [ -e "$HOME/hooks.sh" ]; then

@@ -232,6 +232,7 @@ check_macos_install() {
 	check_link "$HOME/env.sh" "$DOTFILES_DIR/env.sh"
 	check_link "$HOME/.zshrc" "$DOTFILES_DIR/.zshrc"
 	check_link "$HOME/.pi/agent/settings.json" "$DOTFILES_DIR/pi/settings.json"
+	check_link "$HOME/.pi/agent/skills" "$DOTFILES_DIR/pi/skills"
 	if [ -L "$HOME/hooks.sh" ]; then
 		echo "WOULD REMOVE old hooks symlink: $HOME/hooks.sh"
 	elif [ -e "$HOME/hooks.sh" ]; then
@@ -376,9 +377,11 @@ if [ -d "$HOME/dotfiles/.git" ]; then
 	DOTFILES_DIR="$HOME/dotfiles"
 fi
 
+mkdir -p "$DOTFILES_DIR/pi/skills"
 link_file "$DOTFILES_DIR/env.sh" "$HOME/env.sh"
 link_file "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 link_file "$DOTFILES_DIR/pi/settings.json" "$HOME/.pi/agent/settings.json"
+link_file "$DOTFILES_DIR/pi/skills" "$HOME/.pi/agent/skills"
 if [ -L "$HOME/hooks.sh" ]; then
 	rm "$HOME/hooks.sh"
 elif [ -e "$HOME/hooks.sh" ]; then
