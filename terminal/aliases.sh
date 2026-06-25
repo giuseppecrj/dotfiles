@@ -1,20 +1,20 @@
 # Editor
-alias gitignore='zed ~/.gitignore'
-alias zshconfig="zed ~/dotfiles/.zshrc"
-alias envconfig="zed ~/dotfiles/env.sh"
-alias sshconfig="zed ~/.ssh"
-alias aliases="zed ~/dotfiles/terminal/aliases.sh"
-alias s='zed .'
+alias gitignore='cursor ~/.gitignore'
+alias zshconfig="cursor ~/dotfiles/.zshrc"
+alias envconfig="cursor ~/dotfiles/env.sh"
+alias sshconfig="cursor ~/.ssh"
+alias aliases="cursor ~/dotfiles/terminal/aliases.sh"
+alias s='cursor .'
 alias dps="docker ps"
 alias krrd="kubectl rollout restart deployment"
 alias checkLocal="sudo lsof -i tcp:80"
 alias finit="forge init --template https://github.com/giuseppecrj/foundry-bun && mise install"
 nuke() {
-  git fetch -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'); do git branch -D "$branch"; done
+	git fetch -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'); do git branch -D "$branch"; done
 }
 alias brewup="brew update && brew outdated && brew upgrade"
 alias buou="brewup"
-alias foundryconfig="zed ~/.foundry"
+alias foundryconfig="cursor ~/.foundry"
 alias cls='printf "\033c"'
 alias bunx='bun x'
 
@@ -56,10 +56,10 @@ alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/La
 alias httpdump="sudo tcpdump -i en0 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
 # OS X has no `md5sum`, so use `md5` as a fallback
-command -v md5sum > /dev/null || alias md5sum="md5"
+command -v md5sum >/dev/null || alias md5sum="md5"
 
 # OS X has no `sha1sum`, so use `shasum` as a fallback
-command -v sha1sum > /dev/null || alias sha1sum="shasum"
+command -v sha1sum >/dev/null || alias sha1sum="shasum"
 
 # Trim new lines and copy to clipboard
 alias c="tr -d '\n' | pbcopy"
@@ -73,17 +73,20 @@ alias compressImage="sips -s format jpeg -s formatOptions low"
 # Empty the Trash on all mounted volumes and the main HDD.
 # Also clear Apple’s System Logs to improve shell startup speed.
 emptytrash() {
-  echo "This will delete trash folders on mounted volumes, ~/.Trash, and old ASL logs."
-  printf "Continue? [y/N] "
-  read -r reply
-  case "$reply" in
-    [Yy]|[Yy][Ee][Ss]) ;;
-    *) echo "Cancelled"; return 1 ;;
-  esac
+	echo "This will delete trash folders on mounted volumes, ~/.Trash, and old ASL logs."
+	printf "Continue? [y/N] "
+	read -r reply
+	case "$reply" in
+	[Yy] | [Yy][Ee][Ss]) ;;
+	*)
+		echo "Cancelled"
+		return 1
+		;;
+	esac
 
-  sudo rm -rfv /Volumes/*/.Trashes
-  sudo rm -rfv ~/.Trash
-  sudo rm -rfv /private/var/log/asl/*.asl
+	sudo rm -rfv /Volumes/*/.Trashes
+	sudo rm -rfv ~/.Trash
+	sudo rm -rfv /private/var/log/asl/*.asl
 }
 
 # Show/hide hidden files in Finder
@@ -117,7 +120,8 @@ alias map="xargs -n1"
 
 # One of @janmoesen’s ProTip™s
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-  alias "$method"="lwp-request -m '$method'"
+	# shellcheck disable=SC2139 # Capture each HTTP method at definition time.
+	alias "$method"="lwp-request -m '$method'"
 done
 
 # Stuff I never really use but cannot delete either because of http://xkcd.com/530/
@@ -128,10 +132,13 @@ alias pumpitup="osascript -e 'set volume 7'"
 # [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 poweroff() {
-  printf "Shutdown this Mac now? [y/N] "
-  read -r reply
-  case "$reply" in
-    [Yy]|[Yy][Ee][Ss]) sudo shutdown -h now ;;
-    *) echo "Cancelled"; return 1 ;;
-  esac
+	printf "Shutdown this Mac now? [y/N] "
+	read -r reply
+	case "$reply" in
+	[Yy] | [Yy][Ee][Ss]) sudo shutdown -h now ;;
+	*)
+		echo "Cancelled"
+		return 1
+		;;
+	esac
 }

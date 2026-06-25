@@ -58,7 +58,7 @@ casks=(
 	"docker|Docker"
 	"tailscale|Tailscale"
 	"thebrowsercompany-dia|Dia"
-	"zed|Zed"
+	"cursor|Cursor"
 )
 
 app_store_apps=(
@@ -170,7 +170,8 @@ link_file() {
 		return
 	fi
 	if [ -e "$target" ] || [ -L "$target" ]; then
-		local backup="$target.backup.$(date +%Y%m%d%H%M%S)"
+		local backup
+		backup="$target.backup.$(date +%Y%m%d%H%M%S)"
 		mv "$target" "$backup"
 		echo "Backed up existing path: $target -> $backup"
 	fi
@@ -230,8 +231,6 @@ check_macos_install() {
 	fi
 	check_link "$HOME/env.sh" "$DOTFILES_DIR/env.sh"
 	check_link "$HOME/.zshrc" "$DOTFILES_DIR/.zshrc"
-	check_link "$HOME/.config/zed/settings.json" "$DOTFILES_DIR/zed/settings.json"
-	check_link "$HOME/.config/zed/themes/better-itg-flat-dark.json" "$DOTFILES_DIR/zed/themes/better-itg-flat-dark.json"
 	check_link "$HOME/.pi/agent/settings.json" "$DOTFILES_DIR/pi/settings.json"
 	if [ -L "$HOME/hooks.sh" ]; then
 		echo "WOULD REMOVE old hooks symlink: $HOME/hooks.sh"
@@ -334,7 +333,10 @@ fi
 # homebrew.sh [START]
 echo "Installing Homebrew..."
 if ! command -v brew >/dev/null 2>&1; then
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	homebrew_installer="$(mktemp)"
+	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh -o "$homebrew_installer"
+	/bin/bash "$homebrew_installer"
+	rm -f "$homebrew_installer"
 fi
 
 if [ -x /opt/homebrew/bin/brew ]; then
@@ -376,8 +378,6 @@ fi
 
 link_file "$DOTFILES_DIR/env.sh" "$HOME/env.sh"
 link_file "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
-link_file "$DOTFILES_DIR/zed/settings.json" "$HOME/.config/zed/settings.json"
-link_file "$DOTFILES_DIR/zed/themes/better-itg-flat-dark.json" "$HOME/.config/zed/themes/better-itg-flat-dark.json"
 link_file "$DOTFILES_DIR/pi/settings.json" "$HOME/.pi/agent/settings.json"
 if [ -L "$HOME/hooks.sh" ]; then
 	rm "$HOME/hooks.sh"
@@ -436,7 +436,7 @@ grep -qxF ".secrets.env" "$HOME/.gitignore" || echo ".secrets.env" >>"$HOME/.git
 git config --global color.ui auto
 git config --global init.defaultBranch main
 
-git config --global alias.done '!f() { BRANCH=$(git branch --show-current); git checkout main && git pull && git branch -d $BRANCH; }; f'
+git config --global alias.done "!f() { BRANCH=\$(git branch --show-current); git checkout main && git pull && git branch -d \$BRANCH; }; f"
 git config --global alias.aliases "!git config --get-regexp alias | sed -re 's/alias\\.(\\S*)\\s(.*)$/\\1 = \\2/g'"
 git config --global alias.ci commit
 git config --global alias.ck checkout

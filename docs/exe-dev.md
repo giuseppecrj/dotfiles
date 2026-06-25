@@ -39,16 +39,16 @@ Or use the shell alias:
 devbase
 ```
 
-## Open the base devbox in Zed
+## Open the base devbox in Cursor
 
 ```sh
-zed ssh://<base-vm>.exe.xyz/home/exedev
+cursor vscode-remote://ssh-remote+<base-vm>.exe.xyz/home/exedev
 ```
 
 Or use the shell helper:
 
 ```sh
-zed-devbase
+cursor-devbase
 ```
 
 ## Create a new devbox from the base
@@ -74,16 +74,16 @@ exedev-cp my-feature
 ssh my-feature.exe.xyz
 ```
 
-Open clone in Zed:
+Open clone in Cursor:
 
 ```sh
-exedev-zed my-feature
+exedev-cursor my-feature
 ```
 
 Optional path argument:
 
 ```sh
-exedev-zed my-feature /home/exedev/my-project
+exedev-cursor my-feature /home/exedev/my-project
 ```
 
 ## Update the base devbox
@@ -192,7 +192,7 @@ If Pi auth is stored on the base VM, cloned VMs inherit it. That is convenient f
 
 Recommended separation:
 
-- Dev: clone from the base VM, code directly over SSH/Zed, use `mise` tooling.
+- Dev: clone from the base VM, code directly over SSH/Cursor, use `mise` tooling.
 - Test/prototype: clone disposable VMs from the base VM.
 - Production: use separate prod VMs, preferably Docker/Compose plus systemd and exe.dev HTTPS/custom domains.
 
